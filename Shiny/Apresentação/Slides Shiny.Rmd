@@ -1,0 +1,109 @@
+---
+title: "Shiny"
+author: "Dail Castro, Eduardo Moreira, Júlia Garcia, Luís Stelmascuk e Victor Lima"
+date: "15/08/2022"
+output: 
+  ioslides_presentation:
+    transition: slower
+    widescreen: TRUE
+    logo: Logo_UnB.png
+  beamer_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	error = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+# Sumário
+
+## Conteúdo da Apresentação:
+  
+   - Introdução;
+   - A Interface geral do Shiny;
+   - UI;
+   - Server;
+   - Estética do Shiny;
+   - Dashboard;
+   - Publicação.
+  
+
+# Introdução
+
+## O que é o Shiny?
+
+- O **Shiny** é um pacote do R que possibilita a criação de aplicativos web no formato HTML. 
+
+- Permite alocar um trabalho do R em um navegador da web. O objetivo é criar um produto (dashboards, apresentações, jogos, etc.) para que qualquer pessoa possa acessar e interagir.
+ 
+- O Shiny **não** é uma página web!
+
+## Exemplo: Dashboard
+
+<img src="Covid.png"  height=400 width=800/>
+
+- [Galeria do Shiny - shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+## Exemplo: Jogos
+
+<img src="Jogo.png"  height=400 width=750/>
+
+- [Galeria do Shiny - shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/)
+
+## Vantagens do Shiny
+
+<img src="Logo_Shiny.png"  height=200 width=200/>
+
+- Integração com o R;
+
+- Seu framework permite criar aplicações web sem ter nenhum conhecimento prévio em HTML, CSS ou JavaScript;
+
+- Criação de painéis interativos e liberdade ao usuário.
+
+
+## Instalação e Execução
+
+<img src="Instalação1.png"  height=250 width=550/>
+
+<bdi style="font-size:600%" class=white> ------ </bdi> <img src="Instalação2.png"  height=230 width=530 />
+
+
+# Interface do Shiny
+
+## UI e Server
+
+> - **UI - Interface do Usuário:** está relacionada com todas as coisas que os usuários vão ver e interagir:
+> - Textos; 
+
+> - Inputs;
+
+> - Onde alocar os outputs/resultados;
+  
+> - **SERVER:** no Server vai acontecer todo o processamento de dados que o aplicativo vai fazer como cálculos e geração de gráficos de acordo com os inputs do usuário.
+  
+## UI e Server
+
+<img src="Estrutura.png"  height=350 width=862/>
+
+
+## Exemplo: Gerando um Histograma
+
+<bdi style="font-size:250%" class=white> ------ </bdi> <img src="Hist1.png"  height=478 width=740/>
+
+## Exemplo: Gerando um Histograma
+
+<bdi style="font-size:300%" class=white> ------ </bdi> <img src="Hist2.png"  height=495 width=653/>
+
+## Exemplo: Gerando um Histograma
+
+<bdi style="font-size:250%" class=white> ------ </bdi> <img src="Hist3.png"  height=505 width=750/>
+
+## Exemplo: Gerando um Histograma
+
+<bdi style="font-size:250%" class=white> ------ </bdi> <img src="Hist4.png"  height=450 width=720/>
