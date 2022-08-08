@@ -107,3 +107,5 @@ knitr::opts_chunk$set(
 ## Exemplo: Gerando um Histograma
 
 <bdi style="font-size:250%" class=white> ------ </bdi> <img src="Hist4.png"  height=450 width=720/>
+
+## Continuação
