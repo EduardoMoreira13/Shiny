@@ -6,16 +6,21 @@ library(tidyverse)
 
 dados_TO <- read_excel("dados_TO.xlsx")
 
-# Define UI for application that draws a histogram
+# Definição do User Interface
 ui <- fluidPage(
 
-    # Application title
+    # Título
     titlePanel("Natalidade / Fecundidade no Tocantins"),
 
+    # Tema
     theme = shinythemes::shinytheme('flatly'),
+    
+    # Painel Principal
     mainPanel(
+      # Adicionar abas
       tabsetPanel(
         
+        # Aba 1 - Texto
         tabPanel('Introdução',
                  
                  br(),
@@ -42,6 +47,7 @@ ui <- fluidPage(
                  
                  ),
         
+        # Aba 2 - Tabelas
         tabPanel('Tabelas', 
                  
                  br(),
@@ -73,6 +79,7 @@ ui <- fluidPage(
                  br(),
                  DT::DTOutput('table2')),
         
+        # Aba 3 - Gráfico 1
         tabPanel('Gráfico 1', 
                  
                  br(),
@@ -91,6 +98,7 @@ ui <- fluidPage(
                  br(),
                  plotOutput('Pop')),
         
+        # Aba 4 - Gráfico 2
         tabPanel('Gráfico 2', 
                  
                  br(),
@@ -117,7 +125,7 @@ ui <- fluidPage(
                 selectInput(inputId = 'Ano_Final', 
                             label = 'Escolha um Ano:', 
                             choices = c(2000, 2005,2011,2019,
-                                        2020,2021, 2022)),
+                                        2020,2021)),
                  
                  br(),
                  textOutput("sel_Ano"),
@@ -132,19 +140,22 @@ ui <- fluidPage(
                 )
       )))
 
-# Define server logic required to draw a histogram
+# Desenvolvimento de cálculos e processamento no Server
 server <- function(input, output) {
   
+  # Gerar uma tabela
   output$table1 <- DT::renderDataTable(
     {dados_TO %>% 
         group_by(Ano) %>%
         filter(Idade == input$Faixa1)})
   
+  # Gerar uma tabela
   output$table2 <- DT::renderDataTable(
     {dados_TO %>% 
         group_by(Idade) %>%
         filter(Ano %in% input$Ano)})
   
+  # Gerar um gráfico
   output$Pop <- renderPlot({
     dados_TO %>% 
       filter(Idade %in% input$Faixa2) %>% 
@@ -164,6 +175,7 @@ server <- function(input, output) {
     
   })
   
+  # Gerar um gráfico
   output$TEF <- renderPlot({
     dados_TO %>% 
       filter(Idade %in% input$Faixa3) %>% 
@@ -180,6 +192,7 @@ server <- function(input, output) {
       theme_bw()
   })
   
+  # Gerar um texto interativo
   output$sel_Ano <- renderText({
     
     TEF <- dados_TO %>% 
@@ -193,5 +206,5 @@ server <- function(input, output) {
   
   }
 
-# Run the application 
+# Executar a apresentação
 shinyApp(ui = ui, server = server)
