@@ -31,7 +31,8 @@ knitr::opts_chunk$set(
    - Server;
    - Estética do Shiny;
    - Dashboard;
-   - Publicação.
+   - Publicação;
+   - Aplicações
   
 
 # Introdução
@@ -40,7 +41,7 @@ knitr::opts_chunk$set(
 
 - O **Shiny** é um pacote do R que possibilita a criação de aplicativos web no formato HTML. 
 
-- Permite alocar um trabalho do R em um navegador da web. O objetivo é criar um produto (dashboards, apresentações, jogos, etc.) para que qualquer pessoa possa acessar e interagir.
+- Permite alocar um trabalho do R em um navegador da web. O objetivo é criar um produto (dashboards, apresentações, jogos, etc.) para qualquer pessoa acessar e interagir.
  
 - O Shiny **não** é uma página web!
 
@@ -108,4 +109,3 @@ knitr::opts_chunk$set(
 
 <bdi style="font-size:250%" class=white> ------ </bdi> <img src="Hist4.png"  height=450 width=720/>
 
-## Continuação
