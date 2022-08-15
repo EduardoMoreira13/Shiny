@@ -1,0 +1,511 @@
+---
+title: "*Imput and Outup Shiny*"
+author: "Victor"
+date: "2022-08-10"
+output: html_document
+runtime: shiny
+---
+<style type="text/css">
+  body{
+  font-size: 16pt;
+}
+</style>
+
+<!--
+
+```{r  incluindo pacotes, include=FALSE}
+  library(tidyverse)
+  library(dplyr)
+  library(rmarkdown)
+  library(shiny)
+```
+-->
+
+
+# Os Imputs
+
+* Nessa parte nós veremos:
+    + Como são capturados os imputs do usuário
+    + Tipos pré-moldados de Widgets
+        - Construção do Código de um Widget
+        - Construção de uma sequência de Widgets
+        
+        
+# Os Outputs
+
+* Nessa parte nós veremos
+    + Server e as Formas de Output
+        - Construção do Código de um Output
+        - Construção da função Server
+
+
+
+
+# Widgets de Controles
+
+Shiny vem com uma família de widgets pré-construídos, cada um criado com uma função R nomeada de forma transparente. Por exemplo, Shiny fornece uma função chamada `actionButton` que cria um botão de ação, e uma função chamada `sliderInput` que cria uma barra deslizante. <br/><br/><br/><br/>
+
+```{r, echo=FALSE}
+  # Define UI ----
+ui <- fluidPage(
+  titlePanel("Widget Básicos"),
+  
+  fluidRow(
+    
+    column(3,
+           h3("Butões"),
+           actionButton("action", "Ação"),
+           br(),
+           br(), 
+           submitButton("Submeter")),
+    
+    column(3,
+           h3("Uma Caixa de Seleção"),
+           checkboxInput("checkbox", "Opção A", value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput("checkGroup", 
+                              h3("Várias Caixas de Seleção"), 
+                              choices = list("Opção 1" = 1, 
+                                             "Opção 2" = 2, 
+                                             "Opção 3" = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput("date", 
+                     h3("Calendário (Data)"), 
+                     value = "15/08/22"))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           dateRangeInput("dates", h3("Intervalo de Tempo")),
+           helpText("Vai viajar?")),
+    
+    column(3,
+           fileInput("file", h3("Upload de Arquivo")),helpText("Amanda Nunes")),
+    
+    column(3, 
+           h3("Texto de Ajuda"),
+           helpText("Nota: 'Texto de ajuda' não é
+                    um Widget por sí só, mas é um jeito fácil 
+                    de inserir um texto que acompanha
+                    outros Widgets.")),
+    
+    column(3, 
+           numericInput("num", 
+                        h3("Numero"), 
+                        value = 1))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           radioButtons("radio", h3("Seleção de Botão"),
+                        choices = list("Opção 1" = 1, "Opção 2" = 2,
+                                       "Opção 3" = 3),selected = 1)),
+    
+    column(3,
+           selectInput("select", h3("Caixa de Seleção"), 
+                       choices = list("Opção 1" = 1, "Opção 2" = 2,
+                                      "Opção 3" = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput("slider1", h3("Barra de Deslizar"),
+                       min = 0, max = 100, value = 50),
+           sliderInput("slider2", "",
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput("text", h3("Digite algo"), 
+                     value = "O que você me conta?"))   
+  )
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+<br/>
+
+>O Código usado
+
+```{r}
+  # Define UI ----
+ui <- fluidPage(
+  titlePanel("Widget Básicos"),
+  
+  fluidRow(
+    
+    column(3,
+           h3("Butões"),
+           actionButton("action", "Ação"),
+           br(),
+           br(), 
+           submitButton("Submeter")),
+    
+    column(3,
+           h3("Uma Caixa de Seleção"),
+           checkboxInput("checkbox", "Opção A", value = TRUE)),
+    
+    column(3, 
+           checkboxGroupInput("checkGroup", 
+                              h3("Várias Caixa de Seleção"), 
+                              choices = list("Opção 1" = 1, 
+                                             "Opção 2" = 2, 
+                                             "Opção 3" = 3),
+                              selected = 1)),
+    
+    column(3, 
+           dateInput("date", 
+                     h3("Calendário (Data)"), 
+                     value = "15/08/22"))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+          dateRangeInput("dates", h3("Intervalo de Tempo"))),
+    
+    column(3,
+           fileInput("file", h3("Arquivo de Imput "))),
+    
+    column(3, 
+           h3("Texto de Ajuda"),
+           helpText("Nota: 'Texto de ajuda' não é
+                    um Widget por sí só, mas é um jeito fácil 
+                    de inserir um texto que acompanha
+                    outros Widgets.")),
+    
+    column(3, 
+           numericInput("num", 
+                        h3("Numero"), 
+                        value = 1))   
+  ),
+  
+  fluidRow(
+    
+    column(3,
+           radioButtons("radio", h3("Seleção de Botão"),
+                        choices = list("Opção 1" = 1, "Opção 2" = 2,
+                                       "Opção 3" = 3),selected = 1)),
+    
+    column(3,
+           selectInput("select", h3("Caixa de Seleção"), 
+                       choices = list("Opção 1" = 1, "Opção 2" = 2,
+                                      "Opção 3" = 3), selected = 1)),
+    
+    column(3, 
+           sliderInput("slider1", h3("Barra de Deslizar"),
+                       min = 0, max = 100, value = 50),
+           sliderInput("slider2", "",
+                       min = 0, max = 100, value = c(25, 75))
+    ),
+    
+    column(3, 
+           textInput("text", h3("Digite algo"), 
+                     value = "O que você me conta?"))   
+  )
+  
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  
+}
+
+```
+<br/>
+
+
+Você pode adicionar widgets à sua página da Web da mesma forma que adiciona outros tipos de conteúdo HTML    . Para adicionar um widget ao seu aplicativo, coloque uma função de `widget sidebarPanel` em `mainPanel` seu ui objeto.
+
+
+
+```
+  ui <- fluidPage(
+
+  # Adcionando Título ----
+  titlePanel("Sliders"),
+
+  # Configuração padrão da sliderbar ----
+  sidebarLayout(
+
+      sidebarPanel(
+
+      # Input: Intervalo de Integral Simples ----
+      sliderInput("integer", "Inteiro:",
+                  min = 0, max = 1000,
+                  value = 500)
+                )
+      )
+      mainPanel()
+    )
+    
+```
+
+
+
+Cada função de `widget` requer vários argumentos. Os dois primeiros argumentos para cada widget são
+
+um nome para o widget : O usuário não verá esse nome, mas você poderá usá-lo para acessar o valor do widget. O nome deve ser uma cadeia de caracteres.
+
+
+a `label` : esta etiqueta aparecerá com o widget em seu aplicativo. Deve ser uma string de caracteres, mas pode ser uma string vazia "".
+<br/><br/><br/>
+
+# Output e Server
+
+<br/>
+<h2> Pegando os Inputs na ui e MUDANDO o resultado </h2>
+
+Aqui basicamente aprenderemos a construir nosso código de processamento, ou seja, comoo Shiny vai conseguir mudar em tempo real a saída de acordo com a entrada do usuário.
+
+Lembra que o Winget recebe DOIS valores, e um deles é o nome da variável que contém os nossos dados. O tipo de dado definido pelo tipo de winget usado.
+
+<br/><br/>
+
+<h2> Função de Saída </h2>
+```
+Função de saída	        Cria
+dataTableOutput	        Tabela de dados
+htmlOutput	            HTML bruto
+imageOutput	            imagem
+plotOutput	            enredo
+tableOutput	            tabela
+textOutput	            texto
+uiOutput	             HTML bruto
+verbatimTextOutput	    texto
+
+```
+
+<h2> Função de Render para a função Server </h2>
+
+```
+
+função de renderização	        Cria
+renderDataTable	                Tabela de dados
+renderImage	                    Imagens (salvos como um link para um arquivo de origem)
+renderPlot	                    Gréfico
+renderPrint	                    Qualquer saída impressa
+renderTable	                    Quadro de dados, matriz, outras semelhantes a tabelas
+renderText	                    Cadeias de caracteres
+renderUI	                     Um objeto de tag Shiny ou HTML
+
+
+
+```
+
+
+```
+ui <- fluidPage(
+  titlePanel("QUalquer coisa"),
+    sliderInput("variavel_1",
+                label ="O nome que vai aparecer na interface",
+                .
+                .
+                .
+                )
+  
+    selectInput("variavel_2",
+                label = "o nome que vai aparecer NESSA intrface")
+    
+    
+    
+    mainPanel(
+      textOutput("result_slider_input"), #Você escolhe o tipo de acordo com o Widget
+      imageOutput("result_slect_imput") #Você escolhe o tipo de acordo com o Widget
+    )
+)
+server <- function(input,output) {
+  output$result_slider_input <- renderText({
+    paste("Escreve qualquer coisa",input$variavel_1) #E aqui é uma função que você                                                          ##constrói da forma que quiser
+  }
+  output$result_slect_imput <-  renderImage({
+    #códigos da função para como você vai mostrar essa imagem
+  })
+}
+
+```
+
+<br/><br/>
+
+<h2> Um Exemplo </h2>
+
+```{r, echo=FALSE}
+# Define UI for slider demo app ----
+ui <- fluidPage(
+
+  # Adcionando Título ----
+  titlePanel("Sliders"),
+
+  # Configuração padrão da sliderbar ----
+  sidebarLayout(
+
+      sidebarPanel(
+
+      # Input: Intervalo de Integral Simples ----
+      sliderInput("integer", "Inteiro:",
+                  min = 0, max = 1000,
+                  value = 500),
+
+      # Input: Intervalo Decimal com separação de valores ----
+      sliderInput("decimal", "Decimal:",
+                  min = 0, max = 1,
+                  value = 0.5, step = 0.1),
+
+      # Input: Especificação do Tamanho dos Intervalos----
+      sliderInput("range", "Raio:",
+                  min = 1, max = 1000,
+                  value = c(200,500)),
+
+      # Input: Custom currency format for with basic animation ----
+      sliderInput("format", "Formato Customizado:",
+                  min = 0, max = 10000,
+                  value = 0, step = 2500,
+                  pre = "$", sep = ",",
+                  animate = TRUE),
+
+      # Input: Animação com intervalo customizado (em ms) ----
+      # para controlar a velocidade, depois o loop
+      sliderInput("animation", "Looping da Animação:",
+                  min = 1, max = 2000,
+                  value = 1, step = 10,
+                  animate =
+                    animationOptions(interval = 300, loop = TRUE))
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Table summarizing the values entered ----
+      tableOutput("values")
+
+    )
+  )
+)
+
+# Definindo a lógica do server para os sliders laterias ----
+server <- function(input, output) {
+
+  # Reactive expression to create data frame of all input values ----
+  sliderValues <- reactive({
+
+    data.frame(
+      Name = c("Inteiro",
+               "Decimal",
+               "Raio",
+               "Formato Customizado",
+               "Animação"),
+      Value = as.character(c(input$integer,
+                             input$decimal,
+                             paste(input$range, collapse = " "),
+                             input$format,
+                             input$animation)),
+      stringsAsFactors = FALSE)
+
+  })
+
+  # Mostrando valores numa tabela HTML ----
+  output$values <- renderTable({
+    sliderValues()
+  })
+
+}
+shinyApp(ui, server)
+
+```
+
+
+```{r results="hide"}
+# Define UI for slider demo app ----
+ui <- fluidPage(
+
+  # Adcionando Título ----
+  titlePanel("Sliders"),
+
+  # Configuração padrão da sliderbar ----
+  sidebarLayout(
+
+      sidebarPanel(
+
+      # Input: Intervalo de Integral Simples ----
+      sliderInput("integer", "Inteiro:",
+                  min = 0, max = 1000,
+                  value = 500),
+
+      # Input: Intervalo Decimal com separação de valores ----
+      sliderInput("decimal", "Decimal:",
+                  min = 0, max = 1,
+                  value = 0.5, step = 0.1),
+
+      # Input: Especificação do Tamanho dos Intervalos----
+      sliderInput("range", "Raio:",
+                  min = 1, max = 1000,
+                  value = c(200,500)),
+
+      # Input: Custom currency format for with basic animation ----
+      sliderInput("format", "Formato Customizado:",
+                  min = 0, max = 10000,
+                  value = 0, step = 2500,
+                  pre = "$", sep = ",",
+                  animate = TRUE),
+
+      # Input: Animação com intervalo customizado (em ms) ----
+      # para controlar a velocidade, depois o loop
+      sliderInput("animation", "Looping da Animação:",
+                  min = 1, max = 2000,
+                  value = 1, step = 10,
+                  animate =
+                    animationOptions(interval = 300, loop = TRUE))
+
+    ),
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output: Table summarizing the values entered ----
+      tableOutput("values")
+
+    )
+  )
+)
+
+# Define server logic for slider examples ----
+server <- function(input, output) {
+
+  # Reactive expression to create data frame of all input values ----
+  sliderValues <- reactive({
+
+    data.frame(
+      Name = c("Inteiro",
+               "Decimal",
+               "Raio",
+               "Formato Customizado",
+               "Animação"),
+      Value = as.character(c(input$integer,
+                             input$decimal,
+                             paste(input$range, collapse = " "),
+                             input$format,
+                             input$animation)),
+      stringsAsFactors = FALSE)
+
+  })
+
+  # Mostrando valores numa tabela HTML ----
+  output$values <- renderTable({
+    sliderValues()
+  })
+
+}
+```
+
+
