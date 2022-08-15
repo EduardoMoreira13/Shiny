@@ -1,0 +1,75 @@
+---
+title: ''
+output: ioslides_presentation
+runtime: shiny
+---
+
+## O que é um Dashboard?
+
+
+O **Dashboard** é uma apresentação visual dinâmica que possibilita a gestão dos dados, auxiliando na tomada de decisões mais assertivas. É muito importante para o negócio, pois é possível monitorar os dados em tempo real por meio de vários indicadores. 
+
+
+
+<center><img src="https://www.clicdata.com/wp-content/uploads/2019/06/example-dashboard-027-1.png" width=60% ></center>
+
+
+
+## Funções próprias para a estética do Dashboard 
+
+
+Existem várias maneiras de melhorar seu **Dashboard** utilizando funções do shiny.Essas funções são responsáveis por mudanças nos temas, nas cores, também é possível inserir caixas informativas, dentre outras opções. Algumas funções são:
+
+
+- shinythemes: altera o tema, ou seja, o plano de fundo do dashboard, podendo ser mais escuro ou mais claro.
+
+- shinydashboard: permite que o usuário acrescente abas no dashboard, mude o cabeçalho.
+
+- shinyWidgets
+
+- shinyjs
+
+
+## Alguns links com explicações de como utilizar essas funções:
+
+
+
+(https://rstudio.github.io/shinydashboard/structure.html)
+(https://rstudio.github.io/shinythemes/)
+(https://rdrr.io/cran/shinyWidgets/man/setBackgroundImage.html)
+
+
+
+
+## Shiny, Power BI e Tableau
+
+
+Para escolher qual ferramenta utilizar é necessário saber suas necessidades.
+
+Shiny: O usuário possui um maior nível de controle da personalização/customização do dashboard e,além disso, a manipulação dos dados no R é extremamente eficiente.
+
+Power Bi: É mais fácil para usuários iniciantes e possui uma integração total com o ecossistema da Microsoft, mas é apenas para leitura dos dados, não existe acesso ao código-fonte.
+
+Tableau: É muito eficiente para trabalhar com Big Data e é considerado com de fácil uso.Porém, é necessário pagar para ter uma conta.
+
+
+## Comparação
+
+<center><img src="https://www.rstudio.com/blog/shiny-tableau-and-powerbi-better-business-intelligence/bi_chart.png" width=80% ></center>
+
+
+
+## Shiny e Ciência de Dados
+
+
+O shiny é uma ferramenta extremamente importante para o Cientista de Dados, pois além de conseguir manipular os dados e ter acesso ao código-fonte, testando os modelos estatísticos e probabilísticos, com a grande capacidade de personalização/customização é possível apresentar os insights gerados com uma grande variedade, ou seja, é viável direcionar a visualização desses dados de acordo com o objetivo e/ou mensagem que o profissional deseja transmitir.
+
+
+<center><img src="https://www.atlantico.com.br/wp-content/uploads/2021/03/Captura-de-Tela-2021-03-05-a%CC%80s-21.30.21-1.png" width=30% ></center>
+
+
+
+
+
+
+
