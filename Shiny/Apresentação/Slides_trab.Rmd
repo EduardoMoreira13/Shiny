@@ -1,0 +1,100 @@
+---
+title: "Shiny"
+author: "Dail Castro, Eduardo Moreira, Júlia Garcia, Luís Stelmascuk e Victor Lima"
+date: "15/08/2022"
+output: 
+  ioslides_presentation:
+    transition: slower
+    widescreen: TRUE
+    logo: Logo_UnB.png
+  beamer_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	error = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+
+## Server
+
+ - No Server vai acontecer todo o processamento de dados que o aplicativo vai fazer como cálculos e geração de gráficos de acordo com os inputs do usuário;
+  
+ - A função Server vai especificar o comportamento da aplicação;
+
+ - Para que esse processo ocorra, será necessário o uso da função Render.
+
+## Função Render
+
+- Cada função Render é definida para produzir um tipo específico de saída:
+
+- renderPlot() - Gráficos;
+
+- renderPrint() - Qualquer print;
+
+- renderTable() - Diversas estruturas em forma de tabela;
+
+- renderDataTable() - Data frames;
+
+- renderImage() - Imagens;
+
+- renderText() - Strings.
+
+
+## Exemplo em aplicação 
+
+<img src="codigo_server2.png" height=400 width=800/>
+
+## Interface visual
+
+<img src="resultado_server2.png" height=400 width=800/>
+
+## Resultado da Aplicação
+
+<img src="print1.jpeg" height=400 width=800/>
+
+## Reatividade
+
+- Essência da reatividade: saídas reagem (recálculo) automaticamente quando suas entradas mudam.
+
+<img src="print2.jpeg"  height=250 width=550/>
+
+## Contexto Reativo
+
+- Valores reativos só podem ser usados se estiverem inseridos em um contexto reativo:
+
+<img src="print4.jpeg"  height=250 width=550/>
+
+## Erro
+
+<img src="print3.jpeg"  height=400 width=800/>
+
+## Observe
+
+- O observe({...}) é usado para acessar valores reativos:
+
+<img src="print5.jpeg"  height=250 width=550/>
+
+## Outras funções
+
+- reactive({...}) cria variáveis reativas.
+
+<img src="ultimo_print.jpeg"  height=250 width=550/>
+
+## Publicação na Web
+
+- O R studio oferece a publicação via Web de três formas:
+
+- Shinyapps.io: <https://www.shinyapps.io/>;
+
+- Shiny Server: <https://marcusnunes.me/posts/como-instalar-o-shiny-em-seu-proprio-servidor/>;
+
+- RStudio Connect: <https://www.rstudio.com/products/connect/>.
+
+
